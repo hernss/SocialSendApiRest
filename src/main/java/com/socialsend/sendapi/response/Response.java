@@ -3,8 +3,9 @@ package com.socialsend.sendapi.response;
 
 public class Response<T> {
 
-	private String message;
+	
 	private String status;
+	private String message;
 	private T data;
 	
 	public String getMessage() {
