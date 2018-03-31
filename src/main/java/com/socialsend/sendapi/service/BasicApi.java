@@ -154,9 +154,32 @@ public class BasicApi {
 		
 		return r;
 	}
+	
+	@GET
+	@Path("/getconnectioncount")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<Long> getconnectioncount() {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<Long> r ;
+		try {
+			r = new Response<Long>(rpc.getconnectioncount());
+		} catch (Exception e) {
+			r = new Response<Long>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
 	/*
 
 	
-	public double getdifficulty();*/
+	getconnectioncount
+	getnettotals
+	getnetworkinfo
+	getpeerinfo
+	ping
+	*/
+	
 	
 }

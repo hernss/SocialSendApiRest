@@ -9,6 +9,7 @@ import com._37coins.bcJsonRpc.pojo.Address;
 import com._37coins.bcJsonRpc.pojo.AddressInformation;
 import com._37coins.bcJsonRpc.pojo.Block;
 import com._37coins.bcJsonRpc.pojo.BlockChainInfo;
+import com._37coins.bcJsonRpc.pojo.BlockHeader;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.LastBlock;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
@@ -23,29 +24,35 @@ public interface BitcoindInterface {
 	//get info about masternodes currently running	
 	public MasternodeCount getmasternodecount();
 	
-	
+	//Get hash for best block
 	public String getbestblockhash();
 	
+	//Get Block by hash
 	public Block getblock(String hash);
 	
+	//Get info about blockchain status
 	public BlockChainInfo getblockchaininfo();
 	
+	//Get block count
 	public BigDecimal getblockcount();
 	
+	//Get block hash by height on blockchain
 	public String getblockhash(BigDecimal index);
 	
+	//Get Actual Difficulty
 	public double getdifficulty();
 	
+	public BlockHeader getblockheader(String hash);
 	
-	/*getblockheader "hash" ( verbose )
-	getchaintips
+	public long getconnectioncount();
+	/*
 	
-	getmempoolinfo
-	getrawmempool ( verbose )
-	gettxout "txid" n ( includemempool )
-	gettxoutsetinfo
-	verifychain ( checklevel numblocks )
-*/
+	getconnectioncount
+	getnettotals
+	getnetworkinfo
+	getpeerinfo
+	ping
+	*/
 	
 	
 }

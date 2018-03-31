@@ -54,6 +54,10 @@ public class RPCConnection {
 		return this.client.getClient().getdifficulty();
 	}
 	
+	public long getconnectioncount() {
+		return this.client.getClient().getconnectioncount();
+	}
+	
 	protected RPCConnection(){
 
 		try {
