@@ -84,8 +84,26 @@ public class BasicApi {
 		
 		return r;
 	}
+	
+	@GET
+	@Path("/getblockchaininfo")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<BlockChainInfo> getblockchaininfo() {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<BlockChainInfo> r ;
+		try {
+			r = new Response<BlockChainInfo>(rpc.getblockchaininfo());
+		} catch (Exception e) {
+			r = new Response<BlockChainInfo>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
+	
 	/*
-public Block getblock(String hash);
+
 	
 	public BlockChainInfo getblockchaininfo();
 	

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import com._37coins.bcJsonRpc.BitcoindClientFactory;
 import com._37coins.bcJsonRpc.pojo.Block;
+import com._37coins.bcJsonRpc.pojo.BlockChainInfo;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com.socialsend.sendapi.config.RPCConfiguration;
@@ -34,6 +35,10 @@ public class RPCConnection {
 
 	public Block getblock(String hash) {
 		return this.client.getClient().getblock(hash);
+	}
+	
+	public BlockChainInfo getblockchaininfo() {
+		return this.client.getClient().getblockchaininfo();
 	}
 	
 	protected RPCConnection(){
