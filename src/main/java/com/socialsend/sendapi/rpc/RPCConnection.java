@@ -50,6 +50,10 @@ public class RPCConnection {
 		return this.client.getClient().getblockhash(index);
 	}
 	
+	public double getdifficulty() {
+		return this.client.getClient().getdifficulty();
+	}
+	
 	protected RPCConnection(){
 
 		try {

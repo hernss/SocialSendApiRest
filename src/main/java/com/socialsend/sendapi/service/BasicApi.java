@@ -137,11 +137,25 @@ public class BasicApi {
 		
 		return r;
 	}
+	
+	@GET
+	@Path("/getdifficulty")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<Double> getdifficulty() {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<Double> r ;
+		try {
+			r = new Response<Double>(rpc.getdifficulty());
+		} catch (Exception e) {
+			r = new Response<Double>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
 	/*
 
-	
-	
-	public String getblockhash(BigDecimal index);
 	
 	public double getdifficulty();*/
 	
