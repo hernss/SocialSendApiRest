@@ -47,7 +47,7 @@ public interface BitcoindInterface {
 	
 	public long getconnectioncount();
 	
-	public PeerInfo getpeerinfo();
+	public List<PeerInfo> getpeerinfo();
 	/*
 	
 	

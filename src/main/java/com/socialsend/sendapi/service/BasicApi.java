@@ -1,6 +1,7 @@
 package com.socialsend.sendapi.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,6 +16,7 @@ import com._37coins.bcJsonRpc.pojo.Block;
 import com._37coins.bcJsonRpc.pojo.BlockChainInfo;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
+import com._37coins.bcJsonRpc.pojo.PeerInfo;
 
 @Path("/basic")
 public class BasicApi {
@@ -165,6 +167,23 @@ public class BasicApi {
 			r = new Response<Long>(rpc.getconnectioncount());
 		} catch (Exception e) {
 			r = new Response<Long>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
+	
+	@GET
+	@Path("/getpeerinfo")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<List<PeerInfo>> getpeerinfo() {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<List<PeerInfo>> r ;
+		try {
+			r = new Response<List<PeerInfo>>(rpc.getpeerinfo());
+		} catch (Exception e) {
+			r = new Response<List<PeerInfo>>(null);
 			r.setStatus("ERROR");
 			r.setMessage(e.getMessage());
 		}
