@@ -22,8 +22,15 @@ public class Block {
 	private long confirmations;
 	private long version;
 	private long size;
+	private String chainwork;
 	
 	
+	public String getChainwork() {
+		return chainwork;
+	}
+	public void setChainwork(String chainwork) {
+		this.chainwork = chainwork;
+	}
 	public List<String> getTx() {
 		return tx;
 	}
