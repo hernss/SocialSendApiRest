@@ -10,7 +10,6 @@ import com.socialsend.sendapi.rpc.RPCConnection;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 
-
 @Path("/basic")
 public class BasicApi {
 	
