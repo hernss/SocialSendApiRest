@@ -1,12 +1,10 @@
 package com.socialsend.sendapi.service;
 
-import java.math.BigDecimal;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+
 import javax.ws.rs.core.MediaType;
 
 import com.socialsend.sendapi.response.Response;
@@ -24,7 +22,14 @@ public class BasicApi {
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response<Info> getinfo() {
 		RPCConnection rpc = RPCConnection.getInstance();
-		Response<Info> r = new Response<Info>(rpc.getInfo());
+		Response<Info> r;
+		try {
+			r = new Response<Info>(rpc.getInfo());
+		} catch (Exception e) {
+			r = new Response<Info>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
 		
 		return r;
 	}
