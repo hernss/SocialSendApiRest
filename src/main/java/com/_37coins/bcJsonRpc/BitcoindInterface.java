@@ -22,4 +22,23 @@ public interface BitcoindInterface {
 	//get info about masternodes currently running	
 	public MasternodeCount  getmasternodecount();
 	
+	
+	public String getbestblockhash();
+	
+	public Block getblock(String hash);
+	
+	/*getblockchaininfo
+	getblockcount
+	getblockhash index
+	getblockheader "hash" ( verbose )
+	getchaintips
+	getdifficulty
+	getmempoolinfo
+	getrawmempool ( verbose )
+	gettxout "txid" n ( includemempool )
+	gettxoutsetinfo
+	verifychain ( checklevel numblocks )
+*/
+	
+	
 }

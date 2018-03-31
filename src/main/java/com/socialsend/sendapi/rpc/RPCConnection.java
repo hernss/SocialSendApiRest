@@ -45,5 +45,9 @@ public class RPCConnection {
 		}		
 	}
 	
+	public String getbestblockhash() {
+		return this.client.getClient().getbestblockhash();
+	}
+	
 	
 }

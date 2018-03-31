@@ -32,6 +32,17 @@ public class BasicApi {
 		
 		return r;
 	}
+	
+	@GET
+	@Path("/getbestblockhash")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<String> getbestblockhash() {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<String> r = new Response<String>(rpc.getbestblockhash());
+		
+		return r;
+	}
+	
 
 	
 }
