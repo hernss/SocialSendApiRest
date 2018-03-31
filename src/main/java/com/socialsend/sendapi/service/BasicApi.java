@@ -34,7 +34,14 @@ public class BasicApi {
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response<MasternodeCount> getmasternodecount() {
 		RPCConnection rpc = RPCConnection.getInstance();
-		Response<MasternodeCount> r = new Response<MasternodeCount>(rpc.getMn());
+		Response<MasternodeCount> r;
+		try {
+			r = new Response<MasternodeCount>(rpc.getMasternodeCount());
+		} catch (Exception e) {
+			r = new Response<MasternodeCount>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
 		
 		return r;
 	}
@@ -44,7 +51,14 @@ public class BasicApi {
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response<String> getbestblockhash() {
 		RPCConnection rpc = RPCConnection.getInstance();
-		Response<String> r = new Response<String>(rpc.getbestblockhash());
+		Response<String> r;
+		try {
+			r = new Response<String>(rpc.getbestblockhash());
+		} catch (Exception e) {
+			r = new Response<String>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
 		
 		return r;
 	}
@@ -52,10 +66,16 @@ public class BasicApi {
 	@GET
 	@Path("/getblock/{hash}")
 	@Produces({MediaType.APPLICATION_JSON})
-
 	public Response<Block> getblock(@PathParam("hash") String hash) {
 		RPCConnection rpc = RPCConnection.getInstance();
-		Response<Block> r = new Response<Block>(rpc.getblock(hash));
+		Response<Block> r ;
+		try {
+			r = new Response<Block>(rpc.getblock(hash));
+		} catch (Exception e) {
+			r = new Response<Block>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
 		
 		return r;
 	}
