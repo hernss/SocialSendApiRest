@@ -15,7 +15,7 @@ public class Block {
 	private long nonce;
 	private String hash;
 	private String bits;
-	private long difficulty;
+	private double difficulty;
 	private String merkleroot;
 	private String previousblockhash;
 	private String nextblockhash;
@@ -67,10 +67,10 @@ public class Block {
 	public void setBits(String bits) {
 		this.bits = bits;
 	}
-	public long getDifficulty() {
+	public double getDifficulty() {
 		return difficulty;
 	}
-	public void setDifficulty(long difficulty) {
+	public void setDifficulty(double difficulty) {
 		this.difficulty = difficulty;
 	}
 	public String getMerkleroot() {
