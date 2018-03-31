@@ -13,6 +13,7 @@ import com._37coins.bcJsonRpc.pojo.BlockHeader;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.LastBlock;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
+import com._37coins.bcJsonRpc.pojo.PeerInfo;
 import com._37coins.bcJsonRpc.pojo.Transaction;
 
 
@@ -45,11 +46,12 @@ public interface BitcoindInterface {
 	public BlockHeader getblockheader(String hash);
 	
 	public long getconnectioncount();
+	
+	public PeerInfo getpeerinfo();
 	/*
 	
-	getconnectioncount
-	getnettotals
-	getnetworkinfo
+	
+	
 	getpeerinfo
 	ping
 	*/
