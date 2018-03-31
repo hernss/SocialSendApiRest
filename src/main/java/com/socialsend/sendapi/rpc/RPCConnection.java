@@ -28,7 +28,7 @@ public class RPCConnection {
 		return this.client.getClient().getinfo();
 	}
 
-	public MasternodeCount getMn() {
+	public MasternodeCount getMasternodeCount() {
 		return this.client.getClient().getmasternodecount();
 	}
 
