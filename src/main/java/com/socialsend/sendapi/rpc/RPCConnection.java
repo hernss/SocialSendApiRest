@@ -1,81 +1,48 @@
 package com.socialsend.sendapi.rpc;
 
 import java.io.IOException;
-import java.net.Authenticator;
-
-import java.net.PasswordAuthentication;
-import java.net.URL;
-
-
-
+import java.net.MalformedURLException;
 import com._37coins.bcJsonRpc.BitcoindClientFactory;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
-import com.googlecode.jsonrpc4j.JsonRpcHttpClient;
+import com.socialsend.sendapi.config.RPCConfiguration;
 
 
 public class RPCConnection {
-	JsonRpcHttpClient client;
-	String user = "sendrpc";
-	String pw = "66HuNPybj8UkTXZ77kEKcTqrmpCUafVVUYSUFSuk6Suf";
-	Info info;
-	MasternodeCount mn;
+	
+	// Singleton Variables and Procedures
+	private static RPCConnection instance = null;
+	
+	public static RPCConnection getInstance() {
+      if(instance == null) {
+         instance = new RPCConnection();
+      }
+      return instance;
+	}
+	//End Singleton
+	
+	private BitcoindClientFactory client;
 	
 	public Info getInfo() {
-		return info;
+		return this.client.getClient().getinfo();
 	}
 
 	public MasternodeCount getMn() {
-		return mn;
+		return this.client.getClient().getmasternodecount();
 	}
 
-	public void setMn(MasternodeCount mn) {
-		this.mn = mn;
-	}
+	protected RPCConnection(){
 
-	public void setInfo(Info info) {
-		this.info = info;
-	}
-
-	public RPCConnection() throws IOException {
-		
-		Authenticator.setDefault(new Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication( user, pw.toCharArray());
-			}
+		try {
+			RPCConfiguration conf = new RPCConfiguration();
+			client = new BitcoindClientFactory(conf.getUrl(), conf.getUser(), conf.getPass());
+		} catch (MalformedURLException e) {
 			
-		});
-		
-		
-		BitcoindClientFactory client = new BitcoindClientFactory(new URL("http://localhost:50051/"), user, pw);
-		/*
-		String cred = Base64.encodeBytes((user + ":" + pw).getBytes());
-		Map<String, String> headers = new HashMap<String, String>(1);
-		headers.put("Authorization", "Basic " + cred);
-		//client = new JsonRpcHttpClient(new URL("http://localhost:50051/"), headers);
-		//client = new JsonRpcHttpClient(new URL("http://" + user + ":" + pw + "@localhost:50051/"));
-
-		
-		boolean success =false;
-		for (int i = 10; i > 0; i--){
-			try{
-				
-				success = true;
-			}catch(Exception e){
-				try {
-					
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {}
-			}
-			if (success){
-				break;
-			}
-		}
-		if (!success){
-			throw new IOException("could not connect to bitcoind\n" + (new URL("http://" + user + ":" + pw + "@localhost:50051/")).toString());
-		}*/
-		this.info = client.getClient().getinfo();
-		this.mn = client.getClient().getmasternodecount();
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}		
 	}
 	
 	
