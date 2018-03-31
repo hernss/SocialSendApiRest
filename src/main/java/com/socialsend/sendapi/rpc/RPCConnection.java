@@ -1,6 +1,7 @@
 package com.socialsend.sendapi.rpc;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import com._37coins.bcJsonRpc.BitcoindClientFactory;
 import com._37coins.bcJsonRpc.pojo.Block;
@@ -39,6 +40,10 @@ public class RPCConnection {
 	
 	public BlockChainInfo getblockchaininfo() {
 		return this.client.getClient().getblockchaininfo();
+	}
+	
+	public BigDecimal getblockcount() {
+		return this.client.getClient().getblockcount();
 	}
 	
 	protected RPCConnection(){

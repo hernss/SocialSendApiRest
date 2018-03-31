@@ -1,5 +1,7 @@
 package com.socialsend.sendapi.service;
 
+import java.math.BigDecimal;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -102,10 +104,27 @@ public class BasicApi {
 		return r;
 	}
 	
+	@GET
+	@Path("/getblockcount")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<BigDecimal> getblockcount() {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<BigDecimal> r ;
+		try {
+			r = new Response<BigDecimal>(rpc.getblockcount());
+		} catch (Exception e) {
+			r = new Response<BigDecimal>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
+	
 	/*
 
 	
-	public BlockChainInfo getblockchaininfo();
+
 	
 	public BigDecimal getblockcount();
 	
