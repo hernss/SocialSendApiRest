@@ -46,6 +46,10 @@ public class RPCConnection {
 		return this.client.getClient().getblockcount();
 	}
 	
+	public String getblockhash(BigDecimal index) {
+		return this.client.getClient().getblockhash(index);
+	}
+	
 	protected RPCConnection(){
 
 		try {

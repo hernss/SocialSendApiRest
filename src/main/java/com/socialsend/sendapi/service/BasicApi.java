@@ -121,12 +121,25 @@ public class BasicApi {
 		return r;
 	}
 	
+	@GET
+	@Path("/getblockhash/{index}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<String> getblockhash(@PathParam("index") BigDecimal index) {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<String> r ;
+		try {
+			r = new Response<String>(rpc.getblockhash(index));
+		} catch (Exception e) {
+			r = new Response<String>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
 	/*
 
 	
-
-	
-	public BigDecimal getblockcount();
 	
 	public String getblockhash(BigDecimal index);
 	
