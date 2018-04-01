@@ -17,6 +17,7 @@ import com._37coins.bcJsonRpc.pojo.Masternode;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
 import com._37coins.bcJsonRpc.pojo.Transaction;
+import com._37coins.bcJsonRpc.pojo.VerifyResult;
 
 
 
@@ -65,23 +66,11 @@ public interface BitcoindInterface {
 	//Get List of masternodes
 	public List<Masternode> listmasternodes();
 	
+	//Verify if a addres is a valid one
+	public VerifyResult validateaddress(String  sendaddress);
 	/*
-		
-	listmasternodes ( "filter" )
-	masternode "command"...
-	masternodeconnect "address"
-	masternodecurrent
-	masternodedebug
-	mnbudget "command"... ( "passphrase" )
-	mnbudgetrawvote "masternode-tx-hash" masternode-tx-index "proposal-hash" yes|no                                                                                                                                                              time "vote-sig"
-	mnbudgetvote "local|many|alias" "votehash" "yes|no" ( "alias" )
-	mnfinalbudget "command"... ( "passphrase" )
-	mnsync "status|reset"
-	obfuscation <sendaddress> <amount>
-	preparebudget "proposal-name" "url" payment-count block-start "send-address" mon                                                                                                                                                             thy-payment
-	spork <name> [<value>]
-	startmasternode "local|all|many|missing|disabled|alias" lockwallet ( "alias" )
-	submitbudget "proposal-name" "url" payment-count block-start "send-address" mont    
+
+	  
 	*/
 	
 	

@@ -19,6 +19,7 @@ import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.Masternode;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
+import com._37coins.bcJsonRpc.pojo.VerifyResult;
 
 @Path("/basic")
 public class BasicApi {
@@ -237,6 +238,23 @@ public class BasicApi {
 			r = new Response<List<Masternode>>(rpc.listmasternodes());
 		} catch (Exception e) {
 			r = new Response<List<Masternode>>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
+	
+	@GET
+	@Path("/validateaddress/{address}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<VerifyResult> validateaddress(@PathParam("address") String address) {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<VerifyResult> r ;
+		try {
+			r = new Response<VerifyResult>(rpc.validateaddress(address));
+		} catch (Exception e) {
+			r = new Response<VerifyResult>(null);
 			r.setStatus("ERROR");
 			r.setMessage(e.getMessage());
 		}
