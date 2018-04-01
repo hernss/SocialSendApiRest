@@ -19,7 +19,6 @@ import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.Masternode;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
-import com._37coins.bcJsonRpc.pojo.Transaction;
 import com._37coins.bcJsonRpc.pojo.VerifyResult;
 
 @Path("/basic")
