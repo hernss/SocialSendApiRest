@@ -10,6 +10,7 @@ import com._37coins.bcJsonRpc.pojo.Block;
 import com._37coins.bcJsonRpc.pojo.BlockChainInfo;
 import com._37coins.bcJsonRpc.pojo.DecodedTransaction;
 import com._37coins.bcJsonRpc.pojo.Info;
+import com._37coins.bcJsonRpc.pojo.Masternode;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
 import com.socialsend.sendapi.config.RPCConfiguration;
@@ -72,6 +73,10 @@ public class RPCConnection {
 	
 	public String getrawtransaction(String txid) {
 		return this.client.getClient().getrawtransaction(txid);
+	}
+	
+	public List<Masternode> listmasternodes(){
+		return this.client.getClient().listmasternodes();
 	}
 	
 	protected RPCConnection(){

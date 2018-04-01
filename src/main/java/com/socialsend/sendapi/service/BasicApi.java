@@ -16,6 +16,7 @@ import com._37coins.bcJsonRpc.pojo.Block;
 import com._37coins.bcJsonRpc.pojo.BlockChainInfo;
 import com._37coins.bcJsonRpc.pojo.DecodedTransaction;
 import com._37coins.bcJsonRpc.pojo.Info;
+import com._37coins.bcJsonRpc.pojo.Masternode;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
 
@@ -219,6 +220,23 @@ public class BasicApi {
 			r = new Response<String>(rpc.getrawtransaction(txid));
 		} catch (Exception e) {
 			r = new Response<String>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
+	
+	@GET
+	@Path("/listmasternodes")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<List<Masternode>> listmasternodes() {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<List<Masternode>> r ;
+		try {
+			r = new Response<List<Masternode>>(rpc.listmasternodes());
+		} catch (Exception e) {
+			r = new Response<List<Masternode>>(null);
 			r.setStatus("ERROR");
 			r.setMessage(e.getMessage());
 		}
