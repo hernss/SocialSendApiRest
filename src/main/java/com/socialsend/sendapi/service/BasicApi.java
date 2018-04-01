@@ -266,13 +266,13 @@ public class BasicApi {
 	@GET
 	@Path("/gettransaction/{txid}")
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response<Transaction> gettransaction(@PathParam("txid") String txid) {
+	public Response<DecodedTransaction> gettransaction(@PathParam("txid") String txid) {
 		RPCConnection rpc = RPCConnection.getInstance();
-		Response<Transaction> r ;
+		Response<DecodedTransaction> r ;
 		try {
-			r = new Response<Transaction>(rpc.gettransaction(txid));
+			r = new Response<DecodedTransaction>(rpc.decoderawtransaction(rpc.getrawtransaction(txid)));
 		} catch (Exception e) {
-			r = new Response<Transaction>(null);
+			r = new Response<DecodedTransaction>(null);
 			r.setStatus("ERROR");
 			r.setMessage(txid + e.getMessage());
 		}
