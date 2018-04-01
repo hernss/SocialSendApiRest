@@ -32,11 +32,12 @@ public class GenNodeFile {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 
-		
+		String fileName = "addnode.txt";
 		StreamingOutput fileStream;
 		
 		if(userAgent.indexOf("Linux") >= 0) {
 			//if client is running on linux
+			fileName = "addnode.sh";
 			fileStream =  new StreamingOutput()
 	        {
 	            
@@ -59,6 +60,7 @@ public class GenNodeFile {
 	        };
 		}else {
 			//Other os than linux
+			fileName = "addnode.txt";
 			fileStream =  new StreamingOutput()
 	        {
 	            
@@ -83,19 +85,10 @@ public class GenNodeFile {
 		
         return Response
                 .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
-                .header("content-disposition","attachment; filename = addnode.sh")
+                .header("content-disposition","attachment; filename = " + fileName)
                 .build();
 		
 		
 	}
 	
-	@GET
-	@Path("/get")
-	public Response addUser(@HeaderParam("user-agent") String userAgent) {
-
-		return Response.status(200)
-			.entity("addUser is called, userAgent : " + userAgent)
-			.build();
-
-	}
 }
