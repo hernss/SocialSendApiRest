@@ -25,7 +25,7 @@ public class Info {
 	private long keypoolsize;
 	private BigDecimal paytxfee;
 	private BigDecimal relayfee;
-	private String staking_status;
+	private String stakingstatus;
 	private String status = "NO_ERROR";
 	
 	public BigDecimal getObfuscation_balance() {
@@ -35,10 +35,10 @@ public class Info {
 		this.obfuscation_balance = obfuscation_balance;
 	}
 	public String getStaking_status() {
-		return staking_status;
+		return stakingstatus;
 	}
-	public void setStaking_status(String staking_status) {
-		this.staking_status = staking_status;
+	public void setStaking_status(String stakingstatus) {
+		this.stakingstatus = stakingstatus;
 	}
 
 	private String errors;

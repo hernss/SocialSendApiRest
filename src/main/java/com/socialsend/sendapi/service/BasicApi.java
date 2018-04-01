@@ -206,7 +206,7 @@ public class BasicApi {
 		} catch (Exception e) {
 			r = new Response<DecodedTransaction>(null);
 			r.setStatus("ERROR");
-			r.setMessage(e.getMessage());
+			r.setMessage(hex + e.getMessage());
 		}
 		
 		return r;
