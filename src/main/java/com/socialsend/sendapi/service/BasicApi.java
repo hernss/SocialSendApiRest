@@ -19,6 +19,7 @@ import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.Masternode;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
+import com._37coins.bcJsonRpc.pojo.Transaction;
 import com._37coins.bcJsonRpc.pojo.VerifyResult;
 
 @Path("/basic")
@@ -257,6 +258,23 @@ public class BasicApi {
 			r = new Response<VerifyResult>(null);
 			r.setStatus("ERROR");
 			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
+	
+	@GET
+	@Path("/gettransaction/{txid}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<Transaction> gettransaction(@PathParam("txid") String txid) {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<Transaction> r ;
+		try {
+			r = new Response<Transaction>(rpc.gettransaction(txid));
+		} catch (Exception e) {
+			r = new Response<Transaction>(null);
+			r.setStatus("ERROR");
+			r.setMessage(txid + e.getMessage());
 		}
 		
 		return r;

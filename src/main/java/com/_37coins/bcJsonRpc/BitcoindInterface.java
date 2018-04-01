@@ -68,10 +68,10 @@ public interface BitcoindInterface {
 	
 	//Verify if a addres is a valid one
 	public VerifyResult validateaddress(String  sendaddress);
-	/*
-
-	  
-	*/
+	
+	public Transaction gettransaction(String txid);
+	
+	
 	
 	
 }

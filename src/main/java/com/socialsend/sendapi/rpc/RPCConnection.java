@@ -13,6 +13,7 @@ import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.Masternode;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
+import com._37coins.bcJsonRpc.pojo.Transaction;
 import com._37coins.bcJsonRpc.pojo.VerifyResult;
 import com.socialsend.sendapi.config.RPCConfiguration;
 
@@ -83,6 +84,11 @@ public class RPCConnection {
 	public VerifyResult validateaddress(String address) {
 		return this.client.getClient().validateaddress(address);
 	}
+	
+	public Transaction gettransaction(String txid) {
+		return this.client.getClient().gettransaction(txid);
+	}
+	
 	protected RPCConnection(){
 
 		try {
