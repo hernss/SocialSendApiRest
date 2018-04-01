@@ -17,6 +17,7 @@ import com._37coins.bcJsonRpc.pojo.Masternode;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
 import com._37coins.bcJsonRpc.pojo.Transaction;
+import com._37coins.bcJsonRpc.pojo.TxOutInfo;
 import com._37coins.bcJsonRpc.pojo.VerifyResult;
 
 
@@ -71,7 +72,7 @@ public interface BitcoindInterface {
 	
 	public Transaction gettransaction(String txid);
 	
-	
+	public TxOutInfo gettxoutsetinfo();
 	
 	
 }
