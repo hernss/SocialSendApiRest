@@ -287,7 +287,7 @@ public class BasicApi {
 		RPCConnection rpc = RPCConnection.getInstance();
 		Response<TxOutInfo> r ;
 		try {
-			r = new Response<TxOutInfo>(rpc.decoderawtransaction(rpc.gettxoutsetinfo()));
+			r = new Response<TxOutInfo>(rpc.gettxoutsetinfo());
 		} catch (Exception e) {
 			r = new Response<TxOutInfo>(null);
 			r.setStatus("ERROR");
