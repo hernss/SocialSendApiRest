@@ -4,7 +4,7 @@
 <h2>Implemented commands:</h2>
 
 <p>Basic API commands</p>
-<p>API Basic commandas are under http://140.82.15.8:8080/SocialSendApi/api/send/{command}/{parameter}</p>
+<p>API Basic commandas are under http://140.82.15.8:8080/SocialSendApi/api/basic/{command}/{parameter}</p>
 <table>
 <tr><td>getinfo</td><td>Get info about wallet running on server.</td> <td><input id="-1" type="button" url="api/basic/getinfo" value="TEST"/></td></td></tr>
 <tr><td>getmasternodecount</td><td>Get how many masternodes are running.</td> <td><input id="-1" type="button" url="api/basic/getmasternodecount" value="TEST"/></td></tr>
@@ -14,14 +14,26 @@
 <tr><td>getblockcount</td><td>Get block count</td> <td><input id="-1" type="button" url="api/basic/getblockcount" value="TEST"/></td></tr>
 <tr><td>getblockhash/{index}</td><td>Get HASH of block number index</td> <td><input type="text" id="txt-2"/><input type="button" id="2" url="api/basic/getblockhash" value="TEST"/></td></td></tr>
 <tr><td>getdifficulty</td><td>Get actual difficulty</td> <td><input id="-1" type="button" url="api/basic/getdifficulty" value="TEST"/></td></tr>
-<tr><td>getconnectioncount</td><td>Get connections count for API Service</td> <td><input type="button" url="api/basic/getconnectioncount" value="TEST"/></td></td></tr>
+<tr><td>getconnectioncount</td><td>Get connections count for API Service</td> <td><input id="-1" type="button" url="api/basic/getconnectioncount" value="TEST"/></td></td></tr>
 <tr><td>getpeerinfo</td><td>Get info about peers connected to API Service</td> <td><input id="-1" type="button" url="api/basic/getpeerinfo" value="TEST"/></td></tr>
 <tr><td>decoderawtransaction/{hex}</td><td>Decode a transaction from hexadecimal block</td> <td><input type="text" id="txt-4"/><input type="button" id="4" url="api/basic/decoderawtransaction" value="TEST"/></td></td></tr>
 <tr><td>getrawtransaction/{txid}</td><td>Get hexadecimal code of a transaction identified by txid</td> <td><input type="text" id="txt-5"/><input type="button" id="5" url="api/basic/getrawtransaction" value="TEST"/></td></td></tr>
 <tr><td>listmasternodes</td><td>Get a list of every masternodes running</td> <td><input id="-1" type="button" url="api/basic/listmasternodes" value="TEST"/></td></tr>
 <tr><td>validateaddress/{address}</td><td>Get if a address is valid or not</td> <td><input type="text" id="txt-6"/><input type="button" id="6" url="api/basic/validateaddress" value="TEST"/></td></td></tr>
 <tr><td>gettransaction/{txid}</td><td>Get a complete transaction block by a given txid</td> <td><input type="text" id="txt-7"/><input type="button" id="7" url="api/basic/gettransaction" value="TEST"/></td></td></tr>
-</table>	
+</table>
+
+
+<h2>Node File download</h2>
+<p><a href="api/nodefile/download">Click Here to downlaod</a></p>
+<p>If you are running on Linux distribution you have to make executable the downloaded file with de command "chmod +x addnode.sh" and then run it with "./addnode.sh"</p>
+<p>If you ar running on Windows, you have to copy and paste each command in addnode.txt file into the debug console in your wallet.</p>
+
+
+
+
+
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" >
