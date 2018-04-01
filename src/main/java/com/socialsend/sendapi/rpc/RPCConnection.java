@@ -8,6 +8,7 @@ import java.util.List;
 import com._37coins.bcJsonRpc.BitcoindClientFactory;
 import com._37coins.bcJsonRpc.pojo.Block;
 import com._37coins.bcJsonRpc.pojo.BlockChainInfo;
+import com._37coins.bcJsonRpc.pojo.DecodedTransaction;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
@@ -63,6 +64,14 @@ public class RPCConnection {
 	
 	public List<PeerInfo> getpeerinfo(){
 		return this.client.getClient().getpeerinfo();
+	}
+	
+	public DecodedTransaction decoderawtransaction(String hex) {
+		return this.client.getClient().decoderawtransaction(hex);
+	}
+	
+	public String getrawtransaction(String txid) {
+		return this.client.getClient().getrawtransaction(txid);
 	}
 	
 	protected RPCConnection(){

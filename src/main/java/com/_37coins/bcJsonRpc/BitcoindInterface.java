@@ -10,6 +10,7 @@ import com._37coins.bcJsonRpc.pojo.AddressInformation;
 import com._37coins.bcJsonRpc.pojo.Block;
 import com._37coins.bcJsonRpc.pojo.BlockChainInfo;
 import com._37coins.bcJsonRpc.pojo.BlockHeader;
+import com._37coins.bcJsonRpc.pojo.DecodedTransaction;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.LastBlock;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
@@ -43,17 +44,25 @@ public interface BitcoindInterface {
 	//Get Actual Difficulty
 	public double getdifficulty();
 	
+	//Get block header by block hash
 	public BlockHeader getblockheader(String hash);
 	
+	//Get connection counts
 	public long getconnectioncount();
 	
+	//Get info about peers connected
 	public List<PeerInfo> getpeerinfo();
+	
+	//decode transaction from hexstring
+	public DecodedTransaction decoderawtransaction(String hexstring);
+	
+	//Get hexstring from transaction id
+	public String getrawtransaction(String txid);
 	/*
 	
-	
-	
-	getpeerinfo
-	ping
+	decoderawtransaction "hexstring"
+decodescript "hex"
+getrawtransaction "txid" ( verbose )
 	*/
 	
 	

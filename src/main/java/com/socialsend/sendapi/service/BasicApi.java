@@ -14,6 +14,7 @@ import com.socialsend.sendapi.response.Response;
 import com.socialsend.sendapi.rpc.RPCConnection;
 import com._37coins.bcJsonRpc.pojo.Block;
 import com._37coins.bcJsonRpc.pojo.BlockChainInfo;
+import com._37coins.bcJsonRpc.pojo.DecodedTransaction;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.MasternodeCount;
 import com._37coins.bcJsonRpc.pojo.PeerInfo;
@@ -190,14 +191,44 @@ public class BasicApi {
 		
 		return r;
 	}
+	
+	@GET
+	@Path("/decoderawtransaction/{hex}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<DecodedTransaction> decoderawtransaction(@PathParam("hex") String hex) {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<DecodedTransaction> r ;
+		try {
+			r = new Response<DecodedTransaction>(rpc.decoderawtransaction(hex));
+		} catch (Exception e) {
+			r = new Response<DecodedTransaction>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
+	
+	@GET
+	@Path("/getrawtransaction/{txid}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<String> getrawtransaction(@PathParam("txid") String txid) {
+		RPCConnection rpc = RPCConnection.getInstance();
+		Response<String> r ;
+		try {
+			r = new Response<String>(rpc.getrawtransaction(txid));
+		} catch (Exception e) {
+			r = new Response<String>(null);
+			r.setStatus("ERROR");
+			r.setMessage(e.getMessage());
+		}
+		
+		return r;
+	}
 	/*
 
 	
-	getconnectioncount
-	getnettotals
-	getnetworkinfo
-	getpeerinfo
-	ping
+	
 	*/
 	
 	
