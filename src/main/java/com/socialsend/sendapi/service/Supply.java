@@ -18,7 +18,7 @@ public class Supply {
 	@GET
 	@Path("/gettotalsupply")
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response<Double> gettxoutsetinfo() {
+	public Response<Double> gettotalsupply() {
 		RPCConnection rpc = RPCConnection.getInstance();
 		Response<Double> r ;
 		try {

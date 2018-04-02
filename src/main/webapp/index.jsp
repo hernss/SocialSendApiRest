@@ -21,7 +21,19 @@
 <tr><td>listmasternodes</td><td>Get a list of every masternodes running</td> <td><input id="-1" type="button" url="api/basic/listmasternodes" value="TEST"/></td></tr>
 <tr><td>validateaddress/{address}</td><td>Get if a address is valid or not</td> <td><input type="text" id="txt-6"/><input type="button" id="6" url="api/basic/validateaddress" value="TEST"/></td></td></tr>
 <tr><td>gettransaction/{txid}</td><td>Get a complete transaction block by a given txid</td> <td><input type="text" id="txt-7"/><input type="button" id="7" url="api/basic/gettransaction" value="TEST"/></td></td></tr>
+<tr><td>gettxoutsetinfo</td><td>Get total transactions info</td> <td><input type="button" id="-1" url="api/basic/gettxoutsetinfo" value="TEST"/></td></td></tr>
 </table>
+
+<h2>Supply API Commands</h2>
+<p>API Basic commandas are under http://140.82.15.8:8080/SocialSendApi/api/supply/{command}/{parameter}</p>
+<table>
+<tr><td>gettotalsupply</td><td>Get total money supply.</td> <td><input id="-1" type="button" url="api/supply/gettotalsupply" value="TEST"/></td></td></tr>
+<tr><td>getaverageblocktime</td><td>Get average block time for last 1000 blocks.</td> <td><input id="-1" type="button" url="api/supply/getaverageblocktime" value="TEST"/></td></tr>
+
+<tr><td>getblock/{hash}</td><td>Get block data of block HASH</td> <td><input type="text" id="txt-10"/><input type="button" id="10" url="api/basic/getblock" value="TEST"/></td></td></tr>
+</table>
+
+
 
 
 <h2>Node File download</h2>
