@@ -1,6 +1,7 @@
 package com._37coins.bcJsonRpc.pojo;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -12,135 +13,73 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Transaction {
 	/*
 	 * {
-    "amount" : -3.00000000,
-    "fee" : 11.99998519,
-    "confirmations" : 147198,
-    "bcconfirmations" : 147198,
-    "generated" : true,
-    "blockhash" : "e08deb105e9d2da7d68cc2af1f4e62c821221c67b3000930ae1f32f06faa1244",
-    "blockindex" : 1,
-    "blocktime" : 1513633485,
-    "txid" : "68ad2f356fbe92b2513ce0f483a056100cb9c999aab0e6d8e0e0fda255769506",
-    "walletconflicts" : [
-    ],
-    "time" : 1513633456,
-    "timereceived" : 1513633456,
-    "details" : [
+    "hex" : "0100000001b450ecd444e0e776e4adbd4c88d245cde75aee51755903e5d63e23c0f2585275010000006b483045022100e35212c225f54a927359888964ac505022bd17038bfd4a79f335570aada95549022049da0d79c6dbe6396f87c302b38391cc88ff0620b08ad6a6eace6f65ff8e2eb8012102d29abd37b099eaeef5db8e7e980aad2242ffce391b3b00fa61e8f001bfb48d22ffffffff0200ca9a3b000000001976a914434eedde15fb628a918ebbade9941e09c66832c488ac092e8d7f080000001976a914352dc68dd30f60ecad610c1750f3cd2812e8209688ac00000000",
+    "txid" : "9cf191f9e4cba0475ebb880ecaf8569b73dfd843481b66b8c8732519fbd85012",
+    "version" : 1,
+    "locktime" : 0,
+    "vin" : [
         {
-            "account" : "",
-            "category" : "send",
-            "amount" : 0.00000000,
-            "vout" : 0,
-            "fee" : 11.99998519
-        },
-        {
-            "account" : "",
-            "address" : "ST7brMpLSMGhfW5viES8oXzZKnHdKLM3tA",
-            "category" : "send",
-            "amount" : -3134.75000000,
+            "txid" : "755258f2c0233ed6e503597551ee5ae7cd45d2884cbdade476e7e044d4ec50b4",
             "vout" : 1,
-            "fee" : 11.99998519
-        },
-        {
-            "account" : "",
-            "address" : "ST7brMpLSMGhfW5viES8oXzZKnHdKLM3tA",
-            "category" : "send",
-            "amount" : -3131.75989943,
-            "vout" : 2,
-            "fee" : 11.99998519
-        },
-        {
-            "account" : "",
-            "address" : "STNR6JMnMyeCjFHcj2NcnyBczX9uS5jPrs",
-            "category" : "send",
-            "amount" : -3.00000000,
-            "vout" : 3,
-            "fee" : 11.99998519
-        },
-        {
-            "account" : "",
-            "address" : "ST7brMpLSMGhfW5viES8oXzZKnHdKLM3tA",
-            "category" : "receive",
-            "amount" : 3134.75000000,
-            "vout" : 1
-        },
-        {
-            "account" : "",
-            "address" : "ST7brMpLSMGhfW5viES8oXzZKnHdKLM3tA",
-            "category" : "receive",
-            "amount" : 3131.75989943,
-            "vout" : 2
+            "scriptSig" : {
+                "asm" : "3045022100e35212c225f54a927359888964ac505022bd17038bfd4a79f335570aada95549022049da0d79c6dbe6396f87c302b38391cc88ff0620b08ad6a6eace6f65ff8e2eb801 02d29abd37b099eaeef5db8e7e980aad2242ffce391b3b00fa61e8f001bfb48d22",
+                "hex" : "483045022100e35212c225f54a927359888964ac505022bd17038bfd4a79f335570aada95549022049da0d79c6dbe6396f87c302b38391cc88ff0620b08ad6a6eace6f65ff8e2eb8012102d29abd37b099eaeef5db8e7e980aad2242ffce391b3b00fa61e8f001bfb48d22"
+            },
+            "sequence" : 4294967295
         }
     ],
-    "hex" : "01000000019d62285692b2cc5d8e5baec138e3fdc5bf96e8aff5e1d029c929c5611f4ec412020000004847304402201eaa5498cb864ef06c2574df47861da659a9e55c06c0f89ee4470fecf675999702204a826ea0a76915f0f15f8fde109145ec937963d5ff736d7b825c7995c37d90de01ffffffff04000000000000000000c0e690fc48000000232103bb7f241d25be06263dbe4588d2d0059d25511c4fa543f69b04294f3e87136ee6acb75ebeea48000000232103bb7f241d25be06263dbe4588d2d0059d25511c4fa543f69b04294f3e87136ee6ac00a3e111000000001976a91442a680a4bcae3ad7d995499032061a233bf3e79988ac00000000"
+    "vout" : [
+        {
+            "value" : 10.00000000,
+            "n" : 0,
+            "scriptPubKey" : {
+                "asm" : "OP_DUP OP_HASH160 434eedde15fb628a918ebbade9941e09c66832c4 OP_EQUALVERIFY OP_CHECKSIG",
+                "hex" : "76a914434eedde15fb628a918ebbade9941e09c66832c488ac",
+                "reqSigs" : 1,
+                "type" : "pubkeyhash",
+                "addresses" : [
+                    "STRtrnjav8MGfTrkUn1BgMwdCU9mwYCQff"
+                ]
+            }
+        },
+        {
+            "value" : 364.99697161,
+            "n" : 1,
+            "scriptPubKey" : {
+                "asm" : "OP_DUP OP_HASH160 352dc68dd30f60ecad610c1750f3cd2812e82096 OP_EQUALVERIFY OP_CHECKSIG",
+                "hex" : "76a914352dc68dd30f60ecad610c1750f3cd2812e8209688ac",
+                "reqSigs" : 1,
+                "type" : "pubkeyhash",
+                "addresses" : [
+                    "SS9BgZ3sBWnmQvkq1ic4pFCCJ3tkrRKmS5"
+                ]
+            }
+        }
+    ],
+    "blockhash" : "d0f1458c2b8c0cd8d9f199d95a16905ac8dc797f85a36bd9e7f7603e10a59259",
+    "confirmations" : 123133,
+    "time" : 1515343249,
+    "blocktime" : 1515343249
 }
 
-	 */
-	
 
-	
-	private double amount;
-	private double fee;
-	private long confirmations;
-	private long bcconfirmations;
-	private boolean generated;
-	private String blockhash;
-	private long blockindex;
-	private long blocktime;
+	 */
+	private String hex;
 	private String txid;
-	private List<String> walletconflicts;
+	private long version;
+	private long locktime;
+	private List<Vin> vin;
+	private List<Vout> vout;
+	private String blockhash;
+	private BigDecimal confirmations;
 	private long time;
-	private long timereceived;
-	private List<TransactionDetail> details;
-    private String hex;
-    
-	public double getAmount() {
-		return amount;
+	private long blocktime;
+	
+	public String getHex() {
+		return hex;
 	}
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-	public double getFee() {
-		return fee;
-	}
-	public void setFee(double fee) {
-		this.fee = fee;
-	}
-	public long getConfirmations() {
-		return confirmations;
-	}
-	public void setConfirmations(long confirmations) {
-		this.confirmations = confirmations;
-	}
-	public long getBcconfirmations() {
-		return bcconfirmations;
-	}
-	public void setBcconfirmations(long bcconfirmations) {
-		this.bcconfirmations = bcconfirmations;
-	}
-	public boolean isGenerated() {
-		return generated;
-	}
-	public void setGenerated(boolean generated) {
-		this.generated = generated;
-	}
-	public String getBlockhash() {
-		return blockhash;
-	}
-	public void setBlockhash(String blockhash) {
-		this.blockhash = blockhash;
-	}
-	public long getBlockindex() {
-		return blockindex;
-	}
-	public void setBlockindex(long blockindex) {
-		this.blockindex = blockindex;
-	}
-	public long getBlocktime() {
-		return blocktime;
-	}
-	public void setBlocktime(long blocktime) {
-		this.blocktime = blocktime;
+	public void setHex(String hex) {
+		this.hex = hex;
 	}
 	public String getTxid() {
 		return txid;
@@ -148,11 +87,41 @@ public class Transaction {
 	public void setTxid(String txid) {
 		this.txid = txid;
 	}
-	public List<String> getWalletconflicts() {
-		return walletconflicts;
+	public long getVersion() {
+		return version;
 	}
-	public void setWalletconflicts(List<String> walletconflicts) {
-		this.walletconflicts = walletconflicts;
+	public void setVersion(long version) {
+		this.version = version;
+	}
+	public long getLocktime() {
+		return locktime;
+	}
+	public void setLocktime(long locktime) {
+		this.locktime = locktime;
+	}
+	public List<Vin> getVin() {
+		return vin;
+	}
+	public void setVin(List<Vin> vin) {
+		this.vin = vin;
+	}
+	public List<Vout> getVout() {
+		return vout;
+	}
+	public void setVout(List<Vout> vout) {
+		this.vout = vout;
+	}
+	public String getBlockhash() {
+		return blockhash;
+	}
+	public void setBlockhash(String blockhash) {
+		this.blockhash = blockhash;
+	}
+	public BigDecimal getConfirmations() {
+		return confirmations;
+	}
+	public void setConfirmations(BigDecimal confirmations) {
+		this.confirmations = confirmations;
 	}
 	public long getTime() {
 		return time;
@@ -160,26 +129,12 @@ public class Transaction {
 	public void setTime(long time) {
 		this.time = time;
 	}
-	public long getTimereceived() {
-		return timereceived;
+	public long getBlocktime() {
+		return blocktime;
 	}
-	public void setTimereceived(long timereceived) {
-		this.timereceived = timereceived;
+	public void setBlocktime(long blocktime) {
+		this.blocktime = blocktime;
 	}
-	public List<TransactionDetail> getDetails() {
-		return details;
-	}
-	public void setDetails(List<TransactionDetail> details) {
-		this.details = details;
-	}
-	public String getHex() {
-		return hex;
-	}
-	public void setHex(String hex) {
-		this.hex = hex;
-	}
-    
-
    
     
     

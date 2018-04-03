@@ -61,6 +61,8 @@ public interface BitcoindInterface {
 	//Get hexstring from transaction id
 	public String getrawtransaction(String txid);
 	
+	public Transaction getrawtransaction(String txid, int verbose);
+	
 	//get info about masternodes currently running	
 	public MasternodeCount getmasternodecount();
 	
@@ -70,7 +72,7 @@ public interface BitcoindInterface {
 	//Verify if a addres is a valid one
 	public VerifyResult validateaddress(String  sendaddress);
 	
-	public Transaction gettransaction(String txid);
+	
 	
 	public TxOutInfo gettxoutsetinfo();
 	

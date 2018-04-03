@@ -88,7 +88,7 @@ public class RPCConnection {
 	
 	//Solo funciona para tx propias de la wallet
 	public Transaction gettransaction(String txid) {
-		return this.client.getClient().gettransaction(txid);
+		return this.client.getClient().getrawtransaction(txid, 1);
 	}
 	
 	protected RPCConnection(){
