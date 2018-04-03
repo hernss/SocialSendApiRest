@@ -29,13 +29,20 @@
 <table>
 <tr><td>gettotalsupply</td><td>Get total money supply.</td> <td><input id="-1" type="button" url="api/supply/gettotalsupply" value="TEST"/></td></td></tr>
 <tr><td>getaverageblocktime</td><td>Get average block time for last 1000 blocks.</td> <td><input id="-1" type="button" url="api/supply/getaverageblocktime" value="TEST"/></td></tr>
-
-<tr><td>getblock/{hash}</td><td>Get block data of block HASH</td> <td><input type="text" id="txt-10"/><input type="button" id="10" url="api/basic/getblock" value="TEST"/></td></td></tr>
 </table>
 
 
+<h2>Price API Commands</h2>
+<p>API Basic commandas are under http://140.82.15.8:8080/SocialSendApi/api/price/{command}/{parameter}</p>
+<table>
+<tr><td>send_btc</td><td>Get Send value in BTC.</td> <td><input id="-1" type="button" url="api/price/send_btc" value="TEST"/></td></td></tr>
+<tr><td>send_usd</td><td>Get Send value in USD.</td> <td><input id="-1" type="button" url="api/price/send_usd" value="TEST"/></td></tr>
+<tr><td>send_peso</td><td>Get send value in AR$.</td> <td><input id="-1" type="button" url="api/price/send_peso" value="TEST"/></td></tr>
+<tr><td>convertusd2send/{usd}</td><td>Convert USD value into Sends</td> <td><input type="text" id="txt-8"/><input type="button" id="8" url="api/price/convertusd2send" value="TEST"/></td></td></tr>
+<tr><td>convertpeso2send/{peso}</td><td>Convert AR$ value in Sends.</td> <td><input type="text" id="txt-9"/><input type="button" id="9" url="api/price/convertpeso2send" value="TEST"/></td></td></tr>
+</table>
 
-
+	
 <h2>Node File download</h2>
 <p><a href="api/nodefile/download">Click Here to downlaod</a></p>
 <p>If you are running on Linux distribution you have to make executable the downloaded file with de command "chmod +x addnode.sh" and then run it with "./addnode.sh"</p>
