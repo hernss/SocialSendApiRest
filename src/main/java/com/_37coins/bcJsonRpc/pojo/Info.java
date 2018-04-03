@@ -26,7 +26,7 @@ public class Info {
 	private BigDecimal paytxfee;
 	private BigDecimal relayfee;
 	private String stakingstatus;
-	private String status = "NO_ERROR";
+	private String status;
 	
 	public BigDecimal getObfuscation_balance() {
 		return obfuscation_balance;
@@ -34,10 +34,10 @@ public class Info {
 	public void setObfuscation_balance(BigDecimal obfuscation_balance) {
 		this.obfuscation_balance = obfuscation_balance;
 	}
-	public String getStaking_status() {
+	public String getStakingstatus() {
 		return stakingstatus;
 	}
-	public void setStaking_status(String stakingstatus) {
+	public void setStakingstatus(String stakingstatus) {
 		this.stakingstatus = stakingstatus;
 	}
 
