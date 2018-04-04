@@ -39,7 +39,7 @@ public class WalletListener extends Observable implements Observer {
 		final String value = ((String) arg).trim();
 		(new Thread() {
 			public void run() {
-				Transaction tx = client.gettransaction(value);
+				Transaction tx = client.getrawtransaction(value, 1);
 				setChanged();
 				notifyObservers(tx);
 			}
