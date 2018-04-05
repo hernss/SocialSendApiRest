@@ -31,6 +31,12 @@
 <tr><td>getaverageblocktime</td><td>Get average block time for last 1000 blocks.</td> <td><input id="-1" type="button" url="api/supply/getaverageblocktime" value="TEST"/></td></tr>
 </table>
 
+<h2>Advanced Transactions API Commands</h2>
+<p>API Basic commandas are under http://140.82.15.8:8080/SocialSendApi/api/txinfo/{command}/{parameter}</p>
+<table>
+<tr><td>getvalue/{txid}/{addr}</td><td>Get amount of a txid transaction to addr.</td> <td><input type="text" id="txt-10"/><input type="text" id="atxt-10"/><input type="button" id="10" url="api/txinfo/getvalue" value="TEST"/></td></td></tr>
+<tr><td>getinfo/{txid}/{addr}</td><td>Get complete imformation about a txid transaction to addr.</td> <td><input type="text" id="txt-11"/><input type="text" id="atxt-11"/><input type="button" id="11" url="api/txinfo/getinfo" value="TEST"/></td></td></tr>
+</table>
 
 <h2>Price API Commands</h2>
 <p>API Basic commandas are under http://140.82.15.8:8080/SocialSendApi/api/price/{command}/{parameter}</p>
@@ -48,6 +54,10 @@
 <p>If you are running on Linux distribution you have to make executable the downloaded file with de command "chmod +x addnode.sh" and then run it with "./addnode.sh"</p>
 <p>If you ar running on Windows, you have to copy and paste each command in addnode.txt file into the debug console in your wallet.</p>
 
+<h2>Bootstrap download</h2>
+<p><a href="api/nodefile/bootstrap">Click Here to downlaod</a></p>
+<p>Here you can download an automatic daily generated bootstrap to recover the entiry Social Send Blockchain.</p>
+<p>After you download it, just go to your .send folder, remove "blocks" and "chainstate" folders and uncompress the downloaded zip file. Then, open your wallet and it will be almost sincronized.</p>
 
 
 
@@ -61,6 +71,11 @@
 	   if($( this ).attr("id") != "-1"){
 	   		var param = $("#txt-" + $( this ).attr("id")).val();			
 	   		var url = $( this ).attr("url") + "/" + param;
+	   		var elementExists = document.getElementById("atxt-" + $( this ).attr("id"));
+	   		if(elementExists){
+	   			url += "/" + $("#atxt-" + $( this ).attr("id")).val();
+	   		}
+
 	   		window.location = url;
 	   }else{
 	   		var url = $( this ).attr("url");

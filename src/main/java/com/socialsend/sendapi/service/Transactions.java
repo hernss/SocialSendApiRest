@@ -260,5 +260,24 @@ public class Transactions {
 	}
 	
 	
+	/*Generate Payment
+	  Parameters:
+	  		emailSender
+		  	emailReceiver
+		  	depositAddress
+		  	amount
+		  	minimiumConfirmations : default 3
+		  	expire : default 7200 segundos
+	  Response:
+	  		status: OK / ERROR
+	  		message: Optional error message
+	  		data:
+	  			id: internal api id from transaction
+	  			cancelLink: in case of existing pending payment to this address, link for canceling pending payment
+	  			statusLink: link to api to view payment status.
+	
+	*/
+	
+	
 	
 }

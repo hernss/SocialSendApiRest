@@ -1,12 +1,15 @@
 package com.socialsend.sendapi.service;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -90,5 +93,34 @@ public class GenNodeFile {
 		
 		
 	}
+	
+	@GET
+    @Path("/bootstrap")
+    public Response downloadPdfFile()
+    {
+        StreamingOutput fileStream =  new StreamingOutput()
+        {
+            
+            public void write(java.io.OutputStream output)
+            {
+                try
+                {
+                    java.nio.file.Path path = Paths.get("/home/sendapi/bootstrap.zip");
+                    byte[] data = Files.readAllBytes(path);
+                    output.write(data);
+                    output.flush();
+                }
+                catch (Exception e)
+                {
+                	e.printStackTrace();                
+                }
+            }
+        };
+        
+        return Response
+                .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
+                .header("content-disposition","attachment; filename = bootstrap.zip")
+                .build();
+    }
 	
 }
