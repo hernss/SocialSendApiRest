@@ -3,6 +3,7 @@ package com.socialsend.sendapi.database;
 import java.sql.*;
 
 import com._37coins.bcJsonRpc.pojo.NewPaymentParameters;
+import com._37coins.bcJsonRpc.pojo.PaymentStatus;
 
 
 
@@ -171,5 +172,48 @@ public class Database {
 		}
 		
 		return id;
+	}
+
+
+	public PaymentStatus getPaymentStatus(long id) {
+		PreparedStatement consulta;
+		ResultSet resultado;;
+		PaymentStatus ps = null;
+		
+		try {
+			this.open();
+			String sql = "select * from payments where id = '" + id + "' limit 1;";
+ 			
+			consulta=con.prepareStatement(sql);
+			resultado = consulta.executeQuery(sql);
+			if(resultado.next()) {
+				ps = new PaymentStatus();
+				ps.setId(resultado.getLong("id"));
+				ps.setAmount(resultado.getDouble("amount"));
+				ps.setDepositAddress(resultado.getString("depositAddress"));
+				ps.setEmailReceiver(resultado.getString("emailReceiver"));
+				ps.setEmailSender(resultado.getString("emailSender"));
+				ps.setExpire(resultado.getLong("expireTime"));
+				ps.setMinimiumConfirmations(resultado.getLong("confirmations"));
+				
+				String status = resultado.getString("status");
+				
+				if(status.equals("P")) status = "pending";
+				if(status.equals("X")) status = "canceled";
+				if(status.equals("N")) status = "payed but not confirmed";
+				if(status.equals("C")) status = "payed and confirmed";
+				if(status.equals("E")) status = "expired";
+				
+				ps.setStatus(status);				
+			}
+			
+			this.close();
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			this.close();
+			return null;
+		}
+		
+		return ps;
 	}
 }
