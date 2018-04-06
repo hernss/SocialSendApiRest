@@ -22,7 +22,6 @@ public class VerifyResult {
 	private boolean isvalid;
 	private String address;
 	private boolean ismine;
-	
 	private boolean iswatchonly;
 	private boolean isscript;
 	private String pubkey;
