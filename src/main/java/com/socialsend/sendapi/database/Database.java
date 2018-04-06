@@ -22,8 +22,8 @@ public class Database {
 	Connection con=null;
 	private String host = "140.82.15.8";
 	private String port = "3306";
-	private String user = "sendapi";
-	private String pass = "send1234";
+	private String user = "########";
+	private String pass = "########";
 	private String database = "socialsend";
 	
 	public Database() {

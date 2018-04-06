@@ -29,7 +29,7 @@ public class SendMail {
         port = "587";
         emailid = "socialsend@yahoo.com";
         username = "socialsend";
-        password = "######"; //Ya cambie el password expuesto
+        password = "########"; //Ya cambie el password expuesto
                
         emailSettings();
         createSession();
@@ -69,8 +69,8 @@ public class SendMail {
           
             message.setSubject(subject);
          
-            message.setContent(msg, "text/html");
-
+            //message.setContent(msg, "text/html");
+            message.setContent(msg, "text/html; charset=utf-8");
             Transport.send(message);
             System.out.println("Email Sent");
             

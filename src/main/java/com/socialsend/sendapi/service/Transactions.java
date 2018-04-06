@@ -28,7 +28,7 @@ public class Transactions {
 	
 	public String convertDateToString(long timestamp)
 	{
-	   String dateString = null;
+	   String dateString = "";
 	   SimpleDateFormat sdfr = null;
 	   try{
 		   sdfr = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -337,12 +337,24 @@ public class Transactions {
 			return res;
 		}
 		
+		Date d = new Date();
+		
 		String subject = "Payment Request";
+		String SenderMessage = "<p>You are receiving a payment request from " + param.getEmailReceiver() + "</p>";
+		SenderMessage += "<p>The total amount to pay is " + param.getAmount() + " Sends and you have to deposit it to the adrress " + param.getDepositAddress() + " until " + convertDateToString( param.getExpire() + (System.currentTimeMillis()/1000)) + ".</p>";
+		SenderMessage += "<p>You can scan this QR code with your wallet app.</p>";
+		SenderMessage += "<p><img src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + param.getDepositAddress() + "'></img></p>";
+		SenderMessage += "<p>Or if you are on Android and you have installed SocialSend Android Wallet you can follow this <a href='socialsend://address='" + param.getDepositAddress() + "'>link</a></p>";
+
 		
+		if(!sm.sendMessage(param.getEmailSender(), subject, SenderMessage)) {
+			res = new Response<NewPaymentParameters>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Error when trying to send SenderMail");
+			return res;
+		}
 		
-		
-		
-		db.insertPayment(param);
+		//db.insertPayment(param);
 		
 		return new Response<NewPaymentParameters>(param);
 	}
