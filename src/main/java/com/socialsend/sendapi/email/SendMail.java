@@ -35,6 +35,7 @@ public class SendMail {
         createSession();
     }
 
+    
     private void emailSettings() {
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.auth", "true");
