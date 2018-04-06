@@ -29,7 +29,7 @@ public class SendMail {
         port = "587";
         emailid = "socialsend@yahoo.com";
         username = "socialsend";
-        password = "Coins*232";
+        password = "######";
         
         
         emailSettings();
