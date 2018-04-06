@@ -31,6 +31,7 @@ public class SendMail {
         username = "socialsend";
         password = "Coins*232";
         
+        
         emailSettings();
         createSession();
     }
