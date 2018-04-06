@@ -164,6 +164,7 @@ public class Database {
 			this.close();
 			return false;
 		}
+		
 		return true;
 	}
 }
