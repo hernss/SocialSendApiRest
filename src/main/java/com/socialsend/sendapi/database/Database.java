@@ -143,7 +143,27 @@ public class Database {
 
 	
 	public boolean insertPayment(NewPaymentParameters param) {
+		PreparedStatement consulta;
 		
+		try {
+			this.open();
+			String sql = "insert into payments (emailSender, emailReceiver, depositAddress, amount, confirmations, createTime, expireTime, status) values ('";
+			sql += param.getEmailSender() + "', '";
+			sql += param.getEmailReceiver() + "', '";
+			sql += param.getDepositAddress() + "', '";
+			sql += param.getAmount()  + "', '";
+			sql += param.getMinimiumConfirmations() + "', ";
+			sql += "UNIX_TIMESTAMP(), UNIX_TIMESTAMP() + " + param.getExpire() + ", 'P')";
+ 			
+			consulta=con.prepareStatement(sql);
+			consulta.executeQuery();
+			
+			this.close();
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			this.close();
+			return false;
+		}
 		return true;
 	}
 }
