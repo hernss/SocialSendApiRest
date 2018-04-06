@@ -355,7 +355,7 @@ public class Transactions {
 			return res;
 		}
 		
-		int id = db.insertPayment(param);
+		long id = db.insertPayment(param);
 		
 		if(id == 0) {
 			res = new Response<NewPaymentResponse>(null);
