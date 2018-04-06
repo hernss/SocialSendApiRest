@@ -30,8 +30,7 @@ public class SendMail {
         emailid = "socialsend@yahoo.com";
         username = "socialsend";
         password = "######";
-        
-        
+               
         emailSettings();
         createSession();
     }
