@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import com._37coins.bcJsonRpc.pojo.DecodedTransaction;
 import com._37coins.bcJsonRpc.pojo.NewPaymentParameters;
 import com._37coins.bcJsonRpc.pojo.NewPaymentResponse;
+import com._37coins.bcJsonRpc.pojo.PaymentStatus;
 import com._37coins.bcJsonRpc.pojo.ScriptPubKey;
 import com._37coins.bcJsonRpc.pojo.Transaction;
 import com._37coins.bcJsonRpc.pojo.TxInfo;
@@ -384,4 +385,26 @@ public class Transactions {
 		return new Response<NewPaymentResponse>(rp);
 	}
 	
+	@GET
+	@Path("/checkpayment/{id}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<PaymentStatus> checkpayment(@PathParam("id") long id) {
+		
+		Database db = Database.getInstance();
+		Response<PaymentStatus> res;
+		
+		PaymentStatus p = db.getPaymentStatus(id);
+		
+		if(p == null) {
+			res = new Response<PaymentStatus>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Error reading db.");
+			return res;
+		}
+		
+		res = new Response<PaymentStatus>(p);
+		
+		return res;
+		
+	}
 }
