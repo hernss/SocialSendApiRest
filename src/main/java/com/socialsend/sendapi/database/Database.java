@@ -2,6 +2,8 @@ package com.socialsend.sendapi.database;
 
 import java.sql.*;
 
+import com._37coins.bcJsonRpc.pojo.NewPaymentParameters;
+
 
 
 public class Database {
@@ -139,4 +141,9 @@ public class Database {
 		return send * btc * peso;
 	}
 
+	
+	public boolean insertPayment(NewPaymentParameters param) {
+		
+		return true;
+	}
 }

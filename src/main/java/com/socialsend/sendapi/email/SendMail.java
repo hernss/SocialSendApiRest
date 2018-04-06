@@ -35,7 +35,7 @@ public class SendMail {
         createSession();
     }
 
-    public void emailSettings() {
+    private void emailSettings() {
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.auth", "true");
         props.put("mail.debug", "false");
@@ -44,7 +44,7 @@ public class SendMail {
         props.put("mail.smtp.user", username);
     }
 
-    public void createSession() {
+    private void createSession() {
 
         l_session = Session.getInstance(props,
                 new javax.mail.Authenticator() {

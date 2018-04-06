@@ -3,17 +3,22 @@ package com.socialsend.sendapi.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com._37coins.bcJsonRpc.pojo.DecodedTransaction;
+import com._37coins.bcJsonRpc.pojo.NewPaymentParameters;
 import com._37coins.bcJsonRpc.pojo.ScriptPubKey;
 import com._37coins.bcJsonRpc.pojo.Transaction;
 import com._37coins.bcJsonRpc.pojo.TxInfo;
 import com._37coins.bcJsonRpc.pojo.Vout;
+import com.socialsend.sendapi.database.Database;
+import com.socialsend.sendapi.email.SendMail;
 import com.socialsend.sendapi.response.Response;
 import com.socialsend.sendapi.rpc.RPCConnection;
 
@@ -278,6 +283,68 @@ public class Transactions {
 	
 	*/
 	
-	
+	@POST
+	@Path("/makepayment")
+	@Produces({MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_JSON})
+	public Response<NewPaymentParameters> makepayment(NewPaymentParameters param) {
+		
+		Response<NewPaymentParameters> res;
+		
+		RPCConnection rpc = RPCConnection.getInstance();
+		SendMail sm = SendMail.getInstance();
+		Database db = Database.getInstance();
+		
+		if(!rpc.validateaddress(param.getDepositAddress()).isIsvalid()) {
+			res = new Response<NewPaymentParameters>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Invalid Deposit Address");
+			return res;
+		}
+		
+		if(!sm.validateEmail(param.getEmailSender())) {
+			res = new Response<NewPaymentParameters>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Invalid Sender Email");
+			return res;
+		}
+		
+		if(!sm.validateEmail(param.getEmailReceiver())) {
+			res = new Response<NewPaymentParameters>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Invalid Receiver Email");
+			return res;
+		}
+		
+		if(param.getAmount() <= 0) {
+			res = new Response<NewPaymentParameters>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Invalid requested amount");
+			return res;
+		}
+		
+		if(param.getMinimiumConfirmations() <= 0) {
+			res = new Response<NewPaymentParameters>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Invalid Minimium Confirmations");
+			return res;
+		}
+		
+		if(param.getExpire() <= 600) {
+			res = new Response<NewPaymentParameters>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Minimiun expire time is 600 seconds");
+			return res;
+		}
+		
+		String subject = "Payment Request";
+		
+		
+		
+		
+		db.insertPayment(param);
+		
+		return new Response<NewPaymentParameters>(param);
+	}
 	
 }
