@@ -20,7 +20,7 @@ public class Database {
 	//End Singleton
 
 	Connection con=null;
-	private String host = "140.82.15.8";
+	private String host = "localhost";
 	private String port = "3306";
 	private String user = "########";
 	private String pass = "########";
@@ -142,7 +142,7 @@ public class Database {
 	}
 
 	
-	public boolean insertPayment(NewPaymentParameters param) {
+	public int insertPayment(NewPaymentParameters param) {
 		PreparedStatement consulta;
 		
 		try {
@@ -162,9 +162,9 @@ public class Database {
 		} catch (SQLException e) {
 			System.out.println(e.toString());
 			this.close();
-			return false;
+			return 0;
 		}
 		
-		return true;
+		return 1;
 	}
 }

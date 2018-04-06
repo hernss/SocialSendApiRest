@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import com._37coins.bcJsonRpc.pojo.DecodedTransaction;
 import com._37coins.bcJsonRpc.pojo.NewPaymentParameters;
+import com._37coins.bcJsonRpc.pojo.NewPaymentResponse;
 import com._37coins.bcJsonRpc.pojo.ScriptPubKey;
 import com._37coins.bcJsonRpc.pojo.Transaction;
 import com._37coins.bcJsonRpc.pojo.TxInfo;
@@ -287,57 +288,57 @@ public class Transactions {
 	@Path("/makepayment")
 	@Produces({MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_JSON})
-	public Response<NewPaymentParameters> makepayment(NewPaymentParameters param) {
+	public Response<NewPaymentResponse> makepayment(NewPaymentParameters param) {
 		
-		Response<NewPaymentParameters> res;
+		Response<NewPaymentResponse> res;
 		
 		RPCConnection rpc = RPCConnection.getInstance();
 		SendMail sm = SendMail.getInstance();
 		Database db = Database.getInstance();
 		
 		if(!rpc.validateaddress(param.getDepositAddress()).isIsvalid()) {
-			res = new Response<NewPaymentParameters>(null);
+			res = new Response<NewPaymentResponse>(null);
 			res.setStatus("ERROR");
 			res.setMessage("Invalid Deposit Address");
 			return res;
 		}
 		
 		if(!sm.validateEmail(param.getEmailSender())) {
-			res = new Response<NewPaymentParameters>(null);
+			res = new Response<NewPaymentResponse>(null);
 			res.setStatus("ERROR");
 			res.setMessage("Invalid Sender Email");
 			return res;
 		}
 		
 		if(!sm.validateEmail(param.getEmailReceiver())) {
-			res = new Response<NewPaymentParameters>(null);
+			res = new Response<NewPaymentResponse>(null);
 			res.setStatus("ERROR");
 			res.setMessage("Invalid Receiver Email");
 			return res;
 		}
 		
 		if(param.getAmount() <= 0) {
-			res = new Response<NewPaymentParameters>(null);
+			res = new Response<NewPaymentResponse>(null);
 			res.setStatus("ERROR");
 			res.setMessage("Invalid requested amount");
 			return res;
 		}
 		
 		if(param.getMinimiumConfirmations() <= 0) {
-			res = new Response<NewPaymentParameters>(null);
+			res = new Response<NewPaymentResponse>(null);
 			res.setStatus("ERROR");
 			res.setMessage("Invalid Minimium Confirmations");
 			return res;
 		}
 		
 		if(param.getExpire() <= 600) {
-			res = new Response<NewPaymentParameters>(null);
+			res = new Response<NewPaymentResponse>(null);
 			res.setStatus("ERROR");
 			res.setMessage("Minimiun expire time is 600 seconds");
 			return res;
 		}
 		
-		Date d = new Date();
+		
 		
 		String subject = "Payment Request";
 		String SenderMessage = "<p>You are receiving a payment request from " + param.getEmailReceiver() + "</p>";
@@ -348,15 +349,39 @@ public class Transactions {
 
 		
 		if(!sm.sendMessage(param.getEmailSender(), subject, SenderMessage)) {
-			res = new Response<NewPaymentParameters>(null);
+			res = new Response<NewPaymentResponse>(null);
 			res.setStatus("ERROR");
 			res.setMessage("Error when trying to send SenderMail");
 			return res;
 		}
 		
-		//db.insertPayment(param);
+		int id = db.insertPayment(param);
 		
-		return new Response<NewPaymentParameters>(param);
+		if(id == 0) {
+			res = new Response<NewPaymentResponse>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Error when trying insert payment in db.");
+			return res;
+		}
+		
+		String ReceiverMessage = "<p>You have created a new payment request to " + param.getEmailSender() +"</p>";
+		ReceiverMessage += "<p>The total amount to pay is " + param.getAmount() + " Sends and the link is available until " + convertDateToString( param.getExpire() + (System.currentTimeMillis()/1000)) + ".</p>";
+		ReceiverMessage += "<p>The systen will notify you when the payment were done.</p>";
+		ReceiverMessage += "<p>You can check payment status in this <a href='http://140.82.15.8:8080/SocialSendApi/api/txinfo/checkpayment/" + id + "'>link</a></p>";
+
+		if(!sm.sendMessage(param.getEmailReceiver(), subject, ReceiverMessage)) {
+			res = new Response<NewPaymentResponse>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Error when trying to send ReceiverMessage");
+			return res;
+		}
+		
+		NewPaymentResponse rp = new NewPaymentResponse();
+		
+		rp.setId(id);
+		rp.setExpiration(param.getExpire() + (System.currentTimeMillis()/1000));
+		
+		return new Response<NewPaymentResponse>(rp);
 	}
 	
 }
