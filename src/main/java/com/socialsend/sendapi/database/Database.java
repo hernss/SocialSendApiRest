@@ -142,8 +142,10 @@ public class Database {
 	}
 
 	
-	public int insertPayment(NewPaymentParameters param) {
+	public long insertPayment(NewPaymentParameters param) {
 		PreparedStatement consulta;
+		ResultSet resultado;;
+		long id = 0;
 		
 		try {
 			this.open();
@@ -153,10 +155,13 @@ public class Database {
 			sql += param.getDepositAddress() + "', '";
 			sql += param.getAmount()  + "', '";
 			sql += param.getMinimiumConfirmations() + "', ";
-			sql += "UNIX_TIMESTAMP(), UNIX_TIMESTAMP() + " + param.getExpire() + ", 'P')";
+			sql += "UNIX_TIMESTAMP(), UNIX_TIMESTAMP() + " + param.getExpire() + ", 'P'); SELECT LAST_INSERT_ID();";
  			
 			consulta=con.prepareStatement(sql);
-			consulta.executeQuery();
+			resultado = consulta.executeQuery(sql);
+			if(resultado.next()) {
+				id = resultado.getLong(0);
+			}
 			
 			this.close();
 		} catch (SQLException e) {
@@ -165,6 +170,6 @@ public class Database {
 			return 0;
 		}
 		
-		return 1;
+		return id;
 	}
 }
