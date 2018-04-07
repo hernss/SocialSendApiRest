@@ -340,6 +340,12 @@ public class Transactions {
 		}
 		
 		//Primero chequear que no haya un pago pendiente a esa deposit address
+		if(db.isPendindDeposit(param.getDepositAddress())) {
+			res = new Response<NewPaymentResponse>(null);
+			res.setStatus("ERROR");
+			res.setMessage("You have pending deposit to this address. Please cancel your pending order or generate a new address and submit again.");
+			return res;
+		}
 		
 		String subject = "Payment Request";
 		String SenderMessage = "<p>You are receiving a payment request from " + param.getEmailReceiver() + "</p>";

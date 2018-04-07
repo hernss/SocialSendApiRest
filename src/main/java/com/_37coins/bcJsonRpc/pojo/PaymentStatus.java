@@ -8,7 +8,7 @@ public class PaymentStatus {
 	private String depositAddress;
 	private double amount;
 	private long minimiumConfirmations;
-	private long expire;
+	private String expire;
 	private String status;
 	
 	public String getEmailSender() {
@@ -41,10 +41,10 @@ public class PaymentStatus {
 	public void setMinimiumConfirmations(long minimiumConfirmations) {
 		this.minimiumConfirmations = minimiumConfirmations;
 	}
-	public long getExpire() {
+	public String getExpire() {
 		return expire;
 	}
-	public void setExpire(long expire) {
+	public void setExpire(String expire) {
 		this.expire = expire;
 	}
 	public String getStatus() {

@@ -198,7 +198,7 @@ public class Database {
 				ps.setDepositAddress(resultado.getString("depositAddress"));
 				ps.setEmailReceiver(resultado.getString("emailReceiver"));
 				ps.setEmailSender(resultado.getString("emailSender"));
-				ps.setExpire(resultado.getLong("expireTime"));
+				ps.setExpire(resultado.getString("expireTime"));
 				ps.setMinimiumConfirmations(resultado.getLong("confirmations"));
 				
 				String status = resultado.getString("status");
@@ -220,5 +220,29 @@ public class Database {
 		}
 		
 		return ps;
+	}
+	
+	public boolean isPendindDeposit(String address) {
+		PreparedStatement consulta;
+		ResultSet resultado;;
+		boolean isPending = false;
+		
+		try {
+			this.open();
+			String sql = "select * from payments where depositAddress = '" + address + "' and (status = 'P' or status = 'N');";
+ 			
+			consulta=con.prepareStatement(sql);
+			resultado = consulta.executeQuery(sql);
+			if(resultado.next()) {
+				isPending = true;
+			}
+			this.close();
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			this.close();
+			return true;
+		}
+		
+		return isPending;
 	}
 }
