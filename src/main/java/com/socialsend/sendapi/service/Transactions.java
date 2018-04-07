@@ -339,11 +339,11 @@ public class Transactions {
 			return res;
 		}
 		
-		
+		//Primero chequear que no haya un pago pendiente a esa deposit address
 		
 		String subject = "Payment Request";
 		String SenderMessage = "<p>You are receiving a payment request from " + param.getEmailReceiver() + "</p>";
-		SenderMessage += "<p>The total amount to pay is " + param.getAmount() + " Sends and you have to deposit it to the adrress " + param.getDepositAddress() + " until " + convertDateToString( param.getExpire() + (System.currentTimeMillis()/1000)) + ".</p>";
+		SenderMessage += "<p>The total amount to pay is " + param.getAmount() + " Sends and you have to deposit it to the adrress " + param.getDepositAddress() + " until " + convertDateToString( param.getExpire() + (System.currentTimeMillis()/1000)) + " UTC.</p>";
 		SenderMessage += "<p>You can scan this QR code with your wallet app.</p>";
 		SenderMessage += "<p><img src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + param.getDepositAddress() + "'></img></p>";
 		SenderMessage += "<p>Or if you are on Android and you have installed SocialSend Android Wallet you can follow this <a href='socialsend://address='" + param.getDepositAddress() + "'>link</a></p>";
@@ -358,15 +358,15 @@ public class Transactions {
 		
 		long id = db.insertPayment(param);
 		
-		if(id == 0) {
+		if(id ==0) {
 			res = new Response<NewPaymentResponse>(null);
 			res.setStatus("ERROR");
-			res.setMessage("Error when trying insert payment in db.");
+			res.setMessage("Error when trying to insert new payment in db.");
 			return res;
 		}
 		
 		String ReceiverMessage = "<p>You have created a new payment request to " + param.getEmailSender() +"</p>";
-		ReceiverMessage += "<p>The total amount to pay is " + param.getAmount() + " Sends and the link is available until " + convertDateToString( param.getExpire() + (System.currentTimeMillis()/1000)) + ".</p>";
+		ReceiverMessage += "<p>The total amount to pay is " + param.getAmount() + " Sends and the link is available until " + convertDateToString( param.getExpire() + (System.currentTimeMillis()/1000)) + " UTC.</p>";
 		ReceiverMessage += "<p>The systen will notify you when the payment were done.</p>";
 		ReceiverMessage += "<p>You can check payment status in this <a href='http://140.82.15.8:8080/SocialSendApi/api/txinfo/checkpayment/" + id + "'>link</a></p>";
 

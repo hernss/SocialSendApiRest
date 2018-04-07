@@ -21,9 +21,9 @@ public class Database {
 	//End Singleton
 
 	Connection con=null;
-	private String host = "localhost";
+	private String host = "127.0.0.1";
 	private String port = "3306";
-	private String user = "########";
+	private String user = "##########";
 	private String pass = "########";
 	private String database = "socialsend";
 	
@@ -156,12 +156,17 @@ public class Database {
 			sql += param.getDepositAddress() + "', '";
 			sql += param.getAmount()  + "', '";
 			sql += param.getMinimiumConfirmations() + "', ";
-			sql += "UNIX_TIMESTAMP(), UNIX_TIMESTAMP() + " + param.getExpire() + ", 'P'); SELECT LAST_INSERT_ID();";
+			sql += "now(), DATE_ADD(now(), INTERVAL " + param.getExpire() + " SECOND),'P');";
  			
 			consulta=con.prepareStatement(sql);
+			consulta.executeUpdate(sql);
+			
+			sql = "SELECT LAST_INSERT_ID() as id;";
+			consulta=con.prepareStatement(sql);
 			resultado = consulta.executeQuery(sql);
+			
 			if(resultado.next()) {
-				id = resultado.getLong(0);
+				id = resultado.getLong("id");
 			}
 			
 			this.close();
