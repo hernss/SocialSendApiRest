@@ -24,7 +24,7 @@ public class Database {
 	Connection con=null;
 	private String host = "127.0.0.1";
 	private String port = "3306";
-	private String user = "##########";
+	private String user = "#######";
 	private String pass = "########";
 	private String database = "socialsend";
 	

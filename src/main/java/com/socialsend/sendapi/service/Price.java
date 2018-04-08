@@ -132,7 +132,7 @@ public class Price {
 			br = db.getBotResponse();
 			
 			br.setMasternodesCount(rpc.getMasternodeCount().getTotal().longValue());
-			br.setMasternodeValue(br.getMasternodesCount() * br.getPriceUSD());
+			br.setMasternodeValue(6250 * br.getPriceUSD());
 			br.setCoinsLocked(br.getMasternodesCount() * 6250);
 			double TotalSupply = rpc.gettxoutsetinfo().getTotalSupply();
 			br.setCoinsLockedPor(br.getCoinsLocked() / TotalSupply * 100);
