@@ -2,6 +2,7 @@ package com.socialsend.sendapi.database;
 
 import java.sql.*;
 
+import com._37coins.bcJsonRpc.pojo.BotResponse;
 import com._37coins.bcJsonRpc.pojo.NewPaymentParameters;
 import com._37coins.bcJsonRpc.pojo.PaymentStatus;
 
@@ -244,5 +245,47 @@ public class Database {
 		}
 		
 		return isPending;
+	}
+
+
+	public BotResponse getBotResponse() {
+		
+		BotResponse br = new BotResponse();
+		
+		PreparedStatement consulta;
+		ResultSet resultado;;
+		
+		try {
+			this.open();
+			String sql = "select * from send_btc order by id desc limit 1;";
+ 			
+			consulta=con.prepareStatement(sql);
+			resultado = consulta.executeQuery(sql);
+			if(resultado.next()) {
+				br.setBuyVolume(resultado.getDouble("buyVolume"));
+				br.setSellVolume(resultado.getDouble("sellVolume"));
+				br.setPriceBTC(resultado.getDouble("price"));
+			}
+			resultado.close();
+			
+			sql = "select * from btc_usd order by id desc limit 1;";
+			
+			consulta=con.prepareStatement(sql);
+			resultado = consulta.executeQuery(sql);
+			if(resultado.next()) {
+		
+				br.setPriceUSD(br.getPriceBTC() * resultado.getDouble("price"));
+			}
+			resultado.close();
+			
+			this.close();
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			this.close();
+			return null;
+		}
+		
+		return br;
+		
 	}
 }
