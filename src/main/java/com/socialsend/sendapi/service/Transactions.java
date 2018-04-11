@@ -408,7 +408,70 @@ public class Transactions {
 			return res;
 		}
 		
+		p.setEmailReceiver("");
+		p.setEmailSender("");
 		res = new Response<PaymentStatus>(p);
+		
+		return res;
+		
+	}
+	
+	@GET
+	@Path("/expirePayment/{id}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<Void> expirePayment(@PathParam("id") long id) {
+		
+		Database db = Database.getInstance();
+		Response<Void> res;
+		
+		PaymentStatus p = db.getPaymentStatus(id);
+		
+		if(p == null) {
+			res = new Response<Void>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Error reading db.");
+			return res;
+		}
+		
+		SendMail sm = SendMail.getInstance();
+		String subject = "Payment Expired";
+		
+		String message = "<h2>Your payment has expired!</h2>";
+		message += "<p>You have requested a payment from " + p.getEmailSender() + " for " + p.getAmount() + "Sends.</p>";
+		message += "<p>The payment request that you created has expired. Please consider to create a new one</p>";
+		
+		sm.sendMessage(p.getEmailReceiver(), subject, message);
+		
+		message = "<h2>The payment request that you received has expired.</h2>";
+		message += "<p>You have received a request from " + p.getEmailReceiver() + " for " + p.getAmount() + "Sends.</p>";
+		message += "<p>Please do not make this payment, just contact the recipient and ask for a new payment request..</p>";
+	
+		sm.sendMessage(p.getEmailReceiver(), subject, message);
+		
+		res = new Response<Void>(null);
+		
+		return res;
+		
+	}
+	
+	@GET
+	@Path("/updatePayment/{id}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response<Void> updatePayment(@PathParam("id") long id) {
+		
+		Database db = Database.getInstance();
+		Response<Void> res;
+		
+		/*PaymentStatus p = db.getPaymentStatus(id);
+		
+		if(p == null) {
+			res = new Response<Void>(null);
+			res.setStatus("ERROR");
+			res.setMessage("Error reading db.");
+			return res;
+		}*/
+		
+		res = new Response<Void>(null);
 		
 		return res;
 		
